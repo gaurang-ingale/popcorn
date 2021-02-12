@@ -12,13 +12,15 @@ nav {
 .nav_item {
   padding: 0.5em 0.75em;
   margin: 0.4em 0.25em;
-  font-size: 1.25em;
+}
+
+a.nav_item {
+  color: white;
+  text-decoration: none;
 }
 
 .logo {
   flex: 1;
-  color: white;
-  text-decoration: none;
 }
 
 input.nav_item {
