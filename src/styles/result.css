@@ -1,4 +1,4 @@
-.result {
+.description {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,6 +8,8 @@
 .box {
   display: flex;
   justify-content: center;
+  width: fit-content;
+  padding: 1rem 1rem;
 }
 
 .outer {
@@ -16,4 +18,10 @@
   align-items: center;
   justify-content: center;
   margin-top: 4rem;
+  height: auto;
+  width: 100%;
+}
+
+.h2 {
+  flex: 1;
 }
