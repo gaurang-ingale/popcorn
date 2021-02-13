@@ -10,6 +10,9 @@ function NavBar(props) {
       <a href="/" className="nav_item">
         About
       </a>
+      <a href="/" className="nav_item">
+        Advanced Search
+      </a>
       <input className="nav_item" type="text" />
       <button className="nav_item search">Search</button>
     </nav>
