@@ -1,17 +1,14 @@
 nav {
-  position: fixed;
-  top: 0;
   background-color: rgb(2, 37, 108);
   color: white;
-  width: 100%;
-  height: auto;
   display: flex;
   justify-content: space-between;
 }
 
 .nav_item {
-  padding: 0.5em 0.75em;
-  margin: 0.4em 0.25em;
+  padding: 0.5rem 0.75rem;
+  margin: 0.4rem 0.25rem;
+  font-size: 1.125rem;
 }
 
 a.nav_item {
@@ -25,8 +22,8 @@ a.nav_item {
 
 input.nav_item {
   border-radius: 5%;
-  margin-left: 1em;
-  margin-right: 0.5em;
+  margin-left: 1rem;
+  margin-right: 0.5rem;
 }
 
 button {
@@ -38,9 +35,9 @@ button.search {
   background-color: rgb(81, 202, 0);
   border: 2px solid orange;
   border-radius: 10%;
-  font-size: 1em;
+  font-size: 1rem;
   font-weight: bold;
-  margin-right: 1em;
+  margin-right: 1rem;
 }
 
 button.search:hover {

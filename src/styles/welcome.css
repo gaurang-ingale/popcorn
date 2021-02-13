@@ -1,0 +1,15 @@
+.welcome {
+  padding-top: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.welcome h1 {
+  margin-top: 5rem;
+  text-decoration: 2px underline blue;
+}
