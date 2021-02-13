@@ -1,4 +1,5 @@
 import NavBar from "./components/NavBar";
+import Result from "./components/Result";
 import Welcome from "./components/Welcome";
 import "./styles/App.css";
 
@@ -8,7 +9,7 @@ function App() {
       <header className="App-header">
         <NavBar />
       </header>
-      <Welcome />
+      <Result />
     </div>
   );
 }
