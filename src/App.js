@@ -1,6 +1,7 @@
 import NavBar from "./components/NavBar";
 import Result from "./components/Result";
 import Welcome from "./components/Welcome";
+import ResultContainer from "./containers/ResultContainer";
 import "./styles/App.css";
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
       <header className="App-header">
         <NavBar />
       </header>
-      <Result />
+      <ResultContainer name="looper" />
     </div>
   );
 }
