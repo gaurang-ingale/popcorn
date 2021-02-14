@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router";
 import Result from "../components/Result";
 import ResultDetail from "../components/ResultDetail";
 import "../styles/result_container.css";
@@ -6,6 +7,8 @@ import "../styles/result_container.css";
 function ResultContainer(props) {
   const API_KEY = process.env.REACT_APP_OMDB_API_KEY;
   const API_BASE_URL = "http://www.omdbapi.com/?apikey=" + API_KEY;
+
+  const params = useParams();
 
   const [data, setData] = useState({ Response: "False" });
   const errorOutput = (
@@ -15,13 +18,19 @@ function ResultContainer(props) {
   );
 
   useEffect(() => {
-    if (!(typeof props.name === "string") || props.name === "") {
+    if (!(typeof props.name === "string")) {
+      return;
+    }
+
+    const searchName = props.name === "" ? params.name : props.name;
+
+    if (params.name === "" && !params.name) {
       return;
     }
 
     const fetchResponse = async () => {
       const ret = await fetch(
-        `${API_BASE_URL}&t=${props.name}`
+        `${API_BASE_URL}&t=${searchName}`
       ).then((response) => response.json());
       setData(ret);
     };

@@ -1,17 +1,25 @@
-import React from "react";
-import { Redirect, useHistory, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import "../styles/navbar.css";
 
 function NavBar(props) {
   const location = useLocation();
   const history = useHistory();
+  const params = useParams();
+
+  const nameFromParams = params.name ? params.name : "";
+  const [name, setName] = useState(nameFromParams);
 
   const submitHandler = (event) => {
     event.preventDefault();
-    if (!(location.pathname === "/search")) {
-      history.push("/search");
+    if (!(location === `/search/${name}`)) {
+      history.push(`/search/${name}`);
     }
     props.onChange();
+  };
+
+  const changeHandler = (event) => {
+    setName(event.target.value);
   };
 
   return (
@@ -26,7 +34,13 @@ function NavBar(props) {
         Advanced Search
       </a>
       <form onSubmit={submitHandler}>
-        <input className="nav_item" id="search" type="text" />
+        <input
+          className="nav_item"
+          id="search"
+          type="text"
+          value={name}
+          onChange={changeHandler}
+        />
         <input className="nav_item search" type="submit" value="Search" />
       </form>
     </nav>

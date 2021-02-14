@@ -7,7 +7,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./styles/App.css";
 
 function App() {
-  const [searchName, setSearchName] = useState();
+  const [searchName, setSearchName] = useState("");
 
   const navSearchHandler = () => {
     setSearchName(document.getElementById("search").value);
@@ -23,7 +23,7 @@ function App() {
           <Route path="/about">
             <About />
           </Route>
-          <Route path="/search">
+          <Route path={"/search/:name"}>
             <ResultContainer name={searchName} />
           </Route>
         </Switch>
