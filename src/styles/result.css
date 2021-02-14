@@ -7,18 +7,20 @@
 
 .box {
   display: flex;
-  padding: 1rem 1rem;
+  padding: 0rem 1rem;
+  margin-bottom: 0;
 }
 
 .outer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 1rem;
-  padding-top: 3rem;
+  padding-top: 4rem;
   width: 100%;
+  min-height: 100%;
   background-color: rgb(52, 50, 50);
   color: white;
+  position: absolute;
 }
 
 .h2 {

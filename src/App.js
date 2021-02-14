@@ -9,7 +9,7 @@ function App() {
       <header className="App-header">
         <NavBar />
       </header>
-      <ResultContainer name="bleach" />
+      <ResultContainer name="one piece" />
     </div>
   );
 }

@@ -3,4 +3,12 @@ header {
   width: 100%;
   height: auto;
   top: 0;
+  z-index: 10;
+}
+
+html,
+body,
+#root,
+.App {
+  min-height: 100%;
 }
