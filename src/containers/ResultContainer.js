@@ -27,7 +27,7 @@ function ResultContainer(props) {
     };
 
     fetchResponse();
-  }, []);
+  }, [props.name]);
 
   const getOutput = () => {
     if (data.Response === "False") {
