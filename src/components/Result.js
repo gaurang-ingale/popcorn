@@ -1,5 +1,4 @@
 import React from "react";
-import ResultDetail from "./ResultDetail";
 import "../styles/result.css";
 
 function Result(props) {
@@ -10,11 +9,15 @@ function Result(props) {
         {props.title}
       </h2>
       <div className="box">
-        <img src={props.img} alt="Poster" />
+        <div>
+          <img src={props.img} alt="Poster" />
+        </div>
         <div className="description">{props.description}</div>
+        <div>
+          <h3>Ratings</h3>
+          {props.ratings}
+        </div>
       </div>
-      <h3>Ratings</h3>
-      {props.ratings}
     </div>
   );
 }

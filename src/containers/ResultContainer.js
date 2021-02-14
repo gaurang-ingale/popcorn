@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import Result from "../components/Result";
 import ResultDetail from "../components/ResultDetail";
+import "../styles/result_container.css";
 
 function ResultContainer(props) {
   const API_KEY = process.env.REACT_APP_OMDB_API_KEY;
   const API_BASE_URL = "http://www.omdbapi.com/?apikey=" + API_KEY;
 
   const [data, setData] = useState({ Response: "False" });
-  const errorOutput = <p>No results could be found for your search. :(</p>;
+  const errorOutput = (
+    <p className="error_output">
+      No results could be found for your search. :(
+    </p>
+  );
 
   useEffect(() => {
     if (!(typeof props.name === "string") || props.name === "") {
