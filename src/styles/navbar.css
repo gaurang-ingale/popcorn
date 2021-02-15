@@ -30,7 +30,7 @@ button {
   -webkit-appearance: none;
 }
 
-button.search {
+input.search_button {
   color: black;
   background-color: rgb(81, 202, 0);
   border: 2px solid orange;
@@ -40,12 +40,12 @@ button.search {
   margin-right: 1rem;
 }
 
-button.search:hover {
+input.search_button:hover {
   background-color: chartreuse;
   border-color: coral;
 }
 
-button.search:active {
+input.search_button:active {
   background-color: darkgreen;
   border-color: darkorange;
 }

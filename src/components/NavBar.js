@@ -41,7 +41,11 @@ function NavBar(props) {
           value={name}
           onChange={changeHandler}
         />
-        <input className="nav_item search" type="submit" value="Search" />
+        <input
+          className="nav_item search_button"
+          type="submit"
+          value="Search"
+        />
       </form>
     </nav>
   );
