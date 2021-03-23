@@ -18,11 +18,14 @@ function ResultContainer(props) {
   );
 
   useEffect(() => {
-    if (!(typeof props.name === "string")) {
+    if (!(typeof props.name === "string") && !params.name) {
       return;
     }
 
-    const searchName = props.name === "" ? params.name : props.name;
+    const searchName =
+      typeof props.name === "string" && props.name === ""
+        ? params.name
+        : props.name;
 
     if (params.name === "" && !params.name) {
       return;
