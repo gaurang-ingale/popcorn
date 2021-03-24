@@ -6,6 +6,8 @@ import "@testing-library/jest-dom";
 import { MemoryRouter, Router, Route } from "react-router-dom";
 import { createMemoryHistory } from "history";
 import ResultContainer from "../containers/ResultContainer";
+import userEvent from "@testing-library/user-event";
+import App from "../App";
 
 const API_KEY = process.env.REACT_APP_OMDB_API_KEY;
 
@@ -107,7 +109,7 @@ test("searches with url directly (dynamic url)", async () => {
     </MemoryRouter>
   );
 
-  screen.debug();
+  //screen.debug();
 
   await waitFor(() => expect(getSpy).toHaveBeenCalledTimes(1));
 
@@ -134,4 +136,23 @@ test("shows blank page for path '/search/'", async () => {
   expect(
     screen.queryByText(/No results could be found for your search./)
   ).toBeNull();
+});
+
+test("searches with search box correctly", async () => {
+  const getSpy = jest.spyOn(global, "fetch");
+
+  render(
+    <MemoryRouter initialEntries={["/"]}>
+      <App />
+    </MemoryRouter>
+  );
+
+  screen.debug();
+
+  await waitFor(() => expect(getSpy).toHaveBeenCalledTimes(0));
+
+  userEvent.type(screen.getByPlaceholderText("Movie name"), "bleach");
+
+  expect(await screen.findByText(/Title:/)).toBeInTheDocument();
+  expect(await screen.findByText(/Bleach/)).toBeInTheDocument();
 });
