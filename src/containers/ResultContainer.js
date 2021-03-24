@@ -31,14 +31,24 @@ function ResultContainer(props) {
       return;
     }
 
+    const abortController = new AbortController();
+
     const fetchResponse = async () => {
-      const ret = await fetch(
-        `${API_BASE_URL}&t=${searchName}`
-      ).then((response) => response.json());
-      setData(ret);
+      try {
+        const ret = await fetch(`${API_BASE_URL}&t=${searchName}`, {
+          signal: abortController.signal,
+        }).then((response) => response.json());
+        setData(ret);
+      } catch (e) {
+        if (!abortController.signal.aborted) {
+          throw e;
+        }
+      }
     };
 
     fetchResponse();
+
+    return () => abortController.abort();
   }, [props.name]);
 
   const getOutput = () => {
