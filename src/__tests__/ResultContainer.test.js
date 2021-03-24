@@ -114,3 +114,24 @@ test("searches with url directly (dynamic url)", async () => {
   expect(await screen.findByText(/Title:/)).toBeInTheDocument();
   expect(await screen.findByText(/Bleach/)).toBeInTheDocument();
 });
+
+test("shows blank page for path '/search/'", async () => {
+  const getSpy = jest.spyOn(global, "fetch");
+
+  render(
+    <MemoryRouter initialEntries={["/search/"]}>
+      <Route path="/search/:name">
+        <ResultContainer name="" />
+      </Route>
+    </MemoryRouter>
+  );
+
+  //screen.debug();
+
+  await waitFor(() => expect(getSpy).toHaveBeenCalledTimes(0));
+
+  expect(screen.queryByText(/Title:/)).toBeNull();
+  expect(
+    screen.queryByText(/No results could be found for your search./)
+  ).toBeNull();
+});
