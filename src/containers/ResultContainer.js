@@ -10,10 +10,17 @@ function ResultContainer(props) {
 
   const params = useParams();
 
-  const [data, setData] = useState({ Response: "False" });
+  const [data, setData] = useState({ Response: "" });
   const errorOutput = (
     <p className="error_output">
       No results could be found for your search. :(
+    </p>
+  );
+
+  const searching = (
+    <p className="searching">
+      Please search for a movie/series. If you already have searched, the result
+      is being processed. :)
     </p>
   );
 
@@ -54,6 +61,8 @@ function ResultContainer(props) {
   const getOutput = () => {
     if (data.Response === "False") {
       return errorOutput;
+    } else if (data.Response === "") {
+      return searching;
     } else {
       const description = Object.entries(data).map((element, index) => {
         const [key, value] = element;

@@ -140,7 +140,6 @@ test("shows blank page for path '/search/'", async () => {
 
 test("searches with search box correctly (click the search button)", async () => {
   const fetchSpy = jest.spyOn(global, "fetch");
-  const getSpy = jest.fn();
 
   render(
     <MemoryRouter initialEntries={["/"]}>
