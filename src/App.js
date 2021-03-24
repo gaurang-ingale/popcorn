@@ -14,21 +14,19 @@ function App() {
   };
 
   return (
-    <BrowserRouter>
-      <div className="App">
-        <header className="App-header">
-          <NavBar onChange={navSearchHandler} />
-        </header>
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path={"/search/:name"}>
-            <ResultContainer name={searchName} />
-          </Route>
-        </Switch>
-      </div>
-    </BrowserRouter>
+    <div className="App">
+      <header className="App-header">
+        <NavBar onChange={navSearchHandler} />
+      </header>
+      <Switch>
+        <Route path="/about">
+          <About />
+        </Route>
+        <Route path={"/search/:name"}>
+          <ResultContainer name={searchName} />
+        </Route>
+      </Switch>
+    </div>
   );
 }
 

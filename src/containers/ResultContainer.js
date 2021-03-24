@@ -44,11 +44,14 @@ function ResultContainer(props) {
       try {
         const ret = await fetch(`${API_BASE_URL}&t=${searchName}`, {
           signal: abortController.signal,
-        }).then((response) => response.json());
+        })
+          .then((response) => response.json())
+          .catch((e) => {
+            return { Response: "False" };
+          });
         setData(ret);
       } catch (e) {
         if (!abortController.signal.aborted) {
-          throw e;
         }
       }
     };
@@ -56,7 +59,7 @@ function ResultContainer(props) {
     fetchResponse();
 
     return () => abortController.abort();
-  }, [props.name]);
+  }, [props.name, params.name, API_BASE_URL]);
 
   const getOutput = () => {
     if (data.Response === "False") {

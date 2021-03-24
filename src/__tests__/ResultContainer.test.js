@@ -1,12 +1,12 @@
 import React from "react";
 import { rest } from "msw";
 import { setupServer } from "msw/node";
-import { render, screen, act, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { MemoryRouter, Router, Route } from "react-router-dom";
-import { createMemoryHistory } from "history";
+import { MemoryRouter, Route } from "react-router-dom";
 import ResultContainer from "../containers/ResultContainer";
 import userEvent from "@testing-library/user-event";
+import { createMemoryHistory } from "history";
 import App from "../App";
 
 const API_KEY = process.env.REACT_APP_OMDB_API_KEY;
@@ -78,6 +78,14 @@ const server = setupServer(
   })
 );
 
+beforeEach(() => {
+  jest.resetModules();
+  delete window.location;
+  window.history = createMemoryHistory();
+  // @ts-ignore
+  window.location = new URL("http://localhost:3000/");
+});
+
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
@@ -96,6 +104,30 @@ test('Displays the error message when the show/movie does not exist (Response: "
   ).toBeInTheDocument();
 
   //screen.debug();
+});
+
+test("searches with search box correctly (click the search button)", async () => {
+  const fetchSpy = jest.spyOn(global, "fetch");
+
+  render(
+    <MemoryRouter initialEntries={["/"]}>
+      <App />
+    </MemoryRouter>
+  );
+
+  await waitFor(() => expect(fetchSpy).toHaveBeenCalledTimes(0));
+
+  userEvent.type(screen.getByPlaceholderText("Movie name"), "bleach");
+  userEvent.click(screen.getByDisplayValue("Search"));
+
+  await waitFor(() => expect(fetchSpy).toHaveBeenCalledTimes(1));
+
+  expect(
+    await screen.findByText(/Please search for a movie\/series/)
+  ).toBeInTheDocument();
+
+  expect(await screen.findByText(/Title:/)).toBeInTheDocument();
+  expect(await screen.findByText(/Bleach/)).toBeInTheDocument();
 });
 
 test("searches with url directly (dynamic url)", async () => {
@@ -136,26 +168,4 @@ test("shows blank page for path '/search/'", async () => {
   expect(
     screen.queryByText(/No results could be found for your search./)
   ).toBeNull();
-});
-
-test("searches with search box correctly (click the search button)", async () => {
-  const fetchSpy = jest.spyOn(global, "fetch");
-
-  render(
-    <MemoryRouter initialEntries={["/"]}>
-      <App />
-    </MemoryRouter>
-  );
-
-  screen.debug();
-
-  await waitFor(() => expect(fetchSpy).toHaveBeenCalledTimes(0));
-
-  userEvent.type(screen.getByPlaceholderText("Movie name"), "bleach");
-  userEvent.click(screen.getByDisplayValue("Search"));
-
-  await waitFor(() => expect(fetchSpy).toHaveBeenCalledTimes(1));
-
-  expect(await screen.findByText(/Title:/)).toBeInTheDocument();
-  expect(await screen.findByText(/Bleach/)).toBeInTheDocument();
 });
