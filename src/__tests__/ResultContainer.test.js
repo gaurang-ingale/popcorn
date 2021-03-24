@@ -138,8 +138,9 @@ test("shows blank page for path '/search/'", async () => {
   ).toBeNull();
 });
 
-test("searches with search box correctly", async () => {
-  const getSpy = jest.spyOn(global, "fetch");
+test("searches with search box correctly (click the search button)", async () => {
+  const fetchSpy = jest.spyOn(global, "fetch");
+  const getSpy = jest.fn();
 
   render(
     <MemoryRouter initialEntries={["/"]}>
@@ -149,9 +150,12 @@ test("searches with search box correctly", async () => {
 
   screen.debug();
 
-  await waitFor(() => expect(getSpy).toHaveBeenCalledTimes(0));
+  await waitFor(() => expect(fetchSpy).toHaveBeenCalledTimes(0));
 
   userEvent.type(screen.getByPlaceholderText("Movie name"), "bleach");
+  userEvent.click(screen.getByDisplayValue("Search"));
+
+  await waitFor(() => expect(fetchSpy).toHaveBeenCalledTimes(1));
 
   expect(await screen.findByText(/Title:/)).toBeInTheDocument();
   expect(await screen.findByText(/Bleach/)).toBeInTheDocument();

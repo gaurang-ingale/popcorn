@@ -39,6 +39,7 @@ function NavBar(props) {
           id="search"
           type="text"
           value={name}
+          placeholder="Movie name"
           onChange={changeHandler}
         />
         <input
