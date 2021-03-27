@@ -3,7 +3,7 @@ import NavBar from "./components/NavBar";
 import Welcome from "./components/Welcome";
 import ResultContainer from "./containers/ResultContainer";
 import About from "./components/About";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import "./styles/App.css";
 
 function App() {
@@ -19,6 +19,9 @@ function App() {
         <NavBar onChange={navSearchHandler} />
       </header>
       <Switch>
+        <Route path="/" exact>
+          <Welcome />
+        </Route>
         <Route path="/about">
           <About />
         </Route>

@@ -1,6 +1,6 @@
 import App from "../App";
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter, Route } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
 import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import React from "react";
